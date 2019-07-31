@@ -50,7 +50,7 @@ class CabinetmedCons extends CommonObject
 	var $diaglessec;
 	var $hdm;
 	var $examenclinique;
-	var $examenprescrit;
+	var $acte;
 	var $familleacte;
 	var $traitementprescrit;
 	var $comment;
@@ -107,7 +107,7 @@ class CabinetmedCons extends CommonObject
 		if (isset($this->diaglessec)) $this->diaglessec=trim($this->diaglessec);
         if (isset($this->hdm)) $this->hdm=trim($this->hdm);
 		if (isset($this->examenclinique)) $this->examenclinique=trim($this->examenclinique);
-		if (isset($this->examenprescrit)) $this->examenprescrit=trim($this->examenprescrit);
+		if (isset($this->acte)) $this->acte=trim($this->acte);
 		if (isset($this->familleacte)) $this->familleacte=trim($this->familleacte);
 		if (isset($this->traitementprescrit)) $this->traitementprescrit=trim($this->traitementprescrit);
 		if (isset($this->comment)) $this->comment=trim($this->comment);
@@ -137,7 +137,7 @@ class CabinetmedCons extends CommonObject
 		$sql.= "diaglessec,";
 		$sql.= "hdm,";
 		$sql.= "examenclinique,";
-		$sql.= "examenprescrit,";
+		$sql.= "acte,";
 		$sql.= "familleacte,";
 		$sql.= "traitementprescrit,";
 		$sql.= "comment,";
@@ -163,7 +163,7 @@ class CabinetmedCons extends CommonObject
 		$sql.= " ".(! isset($this->diaglessec)?'NULL':"'".$this->db->escape($this->diaglessec)."'").",";
 		$sql.= " ".(! isset($this->hdm)?'NULL':"'".$this->db->escape($this->hdm)."'").",";
         $sql.= " ".(! isset($this->examenclinique)?'NULL':"'".$this->db->escape($this->examenclinique)."'").",";
-		$sql.= " ".(! isset($this->examenprescrit)?'NULL':"'".$this->db->escape($this->examenprescrit)."'").",";
+		$sql.= " ".(! isset($this->acte)?'NULL':"'".$this->db->escape($this->acte)."'").",";
 		$sql.= " ".(! isset($this->familleacte)?'NULL':"'".$this->db->escape($this->familleacte)."'").",";
 		$sql.= " ".(! isset($this->traitementprescrit)?'NULL':"'".$this->db->escape($this->traitementprescrit)."'").",";
 		$sql.= " ".(! isset($this->comment)?'NULL':"'".$this->db->escape($this->comment)."'").",";
@@ -247,7 +247,7 @@ class CabinetmedCons extends CommonObject
 		$sql.= " t.diaglessec,";
 		$sql.= " t.hdm,";
 		$sql.= " t.examenclinique,";
-		$sql.= " t.examenprescrit,";
+		$sql.= " t.acte,";
 		$sql.= " t.familleacte,";
 		$sql.= " t.traitementprescrit,";
 		$sql.= " t.comment,";
@@ -288,7 +288,7 @@ class CabinetmedCons extends CommonObject
 				$this->diaglessec = $obj->diaglessec;
 				$this->hdm = $obj->hdm;
 				$this->examenclinique = $obj->examenclinique;
-				$this->examenprescrit = $obj->examenprescrit;
+				$this->acte = $obj->acte;
 				$this->familleacte = $obj->familleacte;
 				$this->traitementprescrit = $obj->traitementprescrit;
 				$this->comment = $obj->comment;
@@ -386,7 +386,7 @@ class CabinetmedCons extends CommonObject
 		if (isset($this->diaglessec)) $this->diaglessec=trim($this->diaglessec);
 		if (isset($this->hdm)) $this->hdm=trim($this->hdm);
 		if (isset($this->examenclinique)) $this->examenclinique=trim($this->examenclinique);
-		if (isset($this->examenprescrit)) $this->examenprescrit=trim($this->examenprescrit);
+		if (isset($this->acte)) $this->acte=trim($this->acte);
 		if (isset($this->familleacte)) $this->familleacte=trim($this->familleacte);
 		if (isset($this->traitementprescrit)) $this->traitementprescrit=trim($this->traitementprescrit);
 		if (isset($this->comment)) $this->comment=trim($this->comment);
@@ -414,7 +414,7 @@ class CabinetmedCons extends CommonObject
 		$sql.= " diaglessec=".(isset($this->diaglessec)?"'".$this->db->escape($this->diaglessec)."'":"null").",";
 		$sql.= " hdm=".(isset($this->hdm)?"'".$this->db->escape($this->hdm)."'":"null").",";
 		$sql.= " examenclinique=".(isset($this->examenclinique)?"'".$this->db->escape($this->examenclinique)."'":"null").",";
-		$sql.= " examenprescrit=".(isset($this->examenprescrit)?"'".$this->db->escape($this->examenprescrit)."'":"null").",";
+		$sql.= " acte=".(isset($this->acte)?"'".$this->db->escape($this->acte)."'":"null").",";
 		$sql.= " familleacte=".(isset($this->familleacte)?"'".$this->db->escape($this->familleacte)."'":"null").",";
 		$sql.= " traitementprescrit=".(isset($this->traitementprescrit)?"'".$this->db->escape($this->traitementprescrit)."'":"null").",";
 		$sql.= " comment=".(isset($this->comment)?"'".$this->db->escape($this->comment)."'":"null").",";
@@ -646,7 +646,7 @@ class CabinetmedCons extends CommonObject
 		$this->motifconssec='AAASEC';
 		$this->diaglessec='AAASEC';
 		$this->examenclinique='Examen clinique';
-		$this->examenprescrit='Examen prescrit';
+		$this->acte='Acte médecin';
 		$this->familleacte='Famille des actes';
 		$this->traitementprescrit='Traitement prescrit';
 		$this->comment='Commentaire';

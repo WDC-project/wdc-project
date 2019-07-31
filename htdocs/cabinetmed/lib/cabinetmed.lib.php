@@ -178,6 +178,43 @@ function listexamen($nboflines,$newwidth=0,$type='',$showtype=0,$htmlname='exame
     print '</select>'."\n";
 }
 
+/* ****************************  Liste  des actes ********************************* */
+function listacte($nboflines,$newwidth=0,$htmlname='acte',$selected='',$famille)
+{
+    global $conf,$db,$width;
+
+    if (empty($newwidth)) $newwidth=$width;
+
+    print '<select class="flat valignmiddle maxwidth300onsmartphone" id="list'.$htmlname.'" name="list'.$htmlname.'" '.(empty($conf->dol_use_jmobile)?' style="width: '.$newwidth.'px" ':'').'size="'.$nboflines.'"'.($nboflines > 1?' multiple':'').'>';
+    print '<option value="0"></option>';
+    $sql = 'SELECT s.rowid, s.code, s.label, s.id_famille';
+    $sql.= ' FROM '.MAIN_DB_PREFIX.'cabinetmed_acte as s';
+    $sql.= ' WHERE active = 1';
+    $sql.= ' ORDER BY label';
+    $resql=$db->query($sql);
+
+  // dol_syslog("consultations sql=".$sql);
+    if ($resql)
+    {
+        $num=$db->num_rows($resql);
+        $i=0;
+
+        while ($i < $num)
+	{
+		$obj=$db->fetch_object($resql);
+
+		if($obj->id_famille == $famille)
+		{
+           		 print '<option value="'.$obj->code.'"';
+           		 if ($obj->code == $selected) print ' selected="selected"';
+           		 print '>'.$obj->label.'</option>';
+	   		 $i++;
+		}
+        }
+    }
+    print '</select>'."\n";
+}
+
 
 
 /* ****************************  Liste de famille des actes ********************************* */

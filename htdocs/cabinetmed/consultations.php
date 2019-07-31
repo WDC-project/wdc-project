@@ -175,7 +175,7 @@ if ($action == 'add' || $action == 'update')
         $consult->diaglessec=GETPOST("diaglessec");
         $consult->hdm=trim(GETPOST("hdm"));
         $consult->examenclinique=trim(GETPOST("examenclinique"));
-	$consult->examenprescrit=trim(GETPOST("examenprescrit"));
+	$consult->acte=trim(GETPOST("acte"));
 	$consult->familleacte=trim(GETPOST("familleacte"));
         $consult->traitementprescrit=trim(GETPOST("traitementprescrit"));
         $consult->comment=trim(GETPOST("comment"));
@@ -744,17 +744,17 @@ else
  					changed=true;
     			}
             });
-            jQuery("#addexamenprescrit").click(function () {
-                var t=jQuery("#listexamenprescrit").children( ":selected" ).text();
+            jQuery("#addactebox").click(function () {
+                var t=jQuery("#listacte").children( ":selected" ).text();
             	console.log("Add value t="+t)
             	if (t != "" && t != " ")
                 {
-                    var box = jQuery("#examenprescrit");
+                    var box = jQuery("#acte");
                     u=box.val() + (box.val() != \'\' ? "\n" : \'\') + t;
                     box.val(u); box.html(u);
-                    jQuery("#addexambox .ui-autocomplete-input").val("");
-                    jQuery("#addexambox .ui-autocomplete-input").text("");
-                    jQuery("#listexamenprescrit").get(0).selectedIndex = 0;
+                    jQuery("#addactebox .ui-autocomplete-input").val("");
+                    jQuery("#addactebox .ui-autocomplete-input").text("");
+                    jQuery("#listacte").get(0).selectedIndex = 0;
  					changed=true;
     			}
 	    });
@@ -787,7 +787,7 @@ else
         <style>
             #addmotifbox .ui-autocomplete-input { width: '.$width.'px; }
             #adddiagbox .ui-autocomplete-input { width: '.$width.'px; }
-	    #addexambox .ui-autocomplete-input { width: '.$width.'px; }
+	    #addactebox .ui-autocomplete-input { width: '.$width.'px; }
 	    #addfambox .ui-autocomplete-input { width: '.$width.'px; }
             #paymentsbox .ui-autocomplete-input { width: 140px !important; }
         </style>
@@ -796,7 +796,7 @@ else
 
 		print ajax_combobox('listmotifcons');
 		print ajax_combobox('listdiagles');
-		print ajax_combobox('listexamenprescrit');
+		print ajax_combobox('listacte');
 		print ajax_combobox('listfamilleacte');
 		print ajax_combobox('banque');
 
@@ -986,8 +986,9 @@ else
         //print '</td></tr>';
         //print '</table>';
         //print '</fieldset>';
-
-        print '<div class="fichecenter"></div>';
+/*
+ *
+ *        print '<div class="fichecenter"></div>';
 
         // Prescriptions
         //print '<fieldset id="fieldsetprescription">';
@@ -1001,9 +1002,12 @@ else
         print '<table class="notopnoleftnoright" id="addexambox" width="100%">';
 
         print '<tr><td class="tdtop titlefield">';
-        print $langs->trans("ExamensPrescrits").':';
+        print $langs->trans("Acte").':';
         print '</td><td>';
-        //print '<input type="text" size="3" class="flat" name="searchexamenprescrit" value="'.GETPOST("searchexamenprescrit").'" id="searchexamenprescrit">';
+
+ *
+ * print '<input type="text" size="3" class="flat" name="searchexamenprescrit" value="'.GETPOST("searchexamenprescrit").'" id="searchexamenprescrit">';
+
         listexamen(1,$width,'',0,'examenprescrit');
         print ' <input type="button" class="button" id="addexamenprescrit" name="addexamenprescrit" value="+">';
         if ($user->admin) print ' '.info_admin($langs->trans("YouCanChangeValuesForThisListFromDictionarySetup"),1);
@@ -1012,6 +1016,65 @@ else
         print '</td><td>';
         print '<textarea class="flat" name="examenprescrit" id="examenprescrit" cols="40" rows="'.ROWS_4.'">';
         print $consult->examenprescrit;
+        print '</textarea>';
+        print '</td>';
+        print '</tr>';
+
+        print '<tr><td class="tdtop"><br>'.$langs->trans("Commentaires").':';
+        print '</td><td><br>';
+        print '<textarea name="comment" id="comment" class="flat" cols="40" rows="'.($nboflines-1).'">'.$consult->comment.'</textarea>';
+        print '</td></tr>';
+
+        // Other attributes
+        $parameters=array();
+        $reshook=$hookmanager->executeHooks('formObjectOptions',$parameters,$consult,$action);    // Note that $action and $object may have been modified by hook
+        print $hookmanager->resPrint;
+        if (empty($reshook))
+        {
+            $params=array('colspan'=>1);
+            print $consult->showOptionals($extrafields,'edit',$params);
+        }
+
+        print '</table>';
+
+        //print '</td><td class="tdtop">';
+        print '</div><div class="fichehalfright"><div class="ficheaddleft">';
+
+        print $langs->trans("TraitementsPrescrits").'<br>';
+        print '<textarea name="traitementprescrit" class="flat centpercent" rows="'.($nboflines+1).'">'.$consult->traitementprescrit.'</textarea><br>';
+        print $langs->trans("Infiltrations").'<br>';
+        print '<textarea name="infiltration" id="infiltration" class="flat centpercent" rows="'.ROWS_2.'">'.$consult->infiltration.'</textarea><br>';
+ *
+ *
+ *
+ *
+ * */
+        print '<div class="fichecenter"></div>';
+
+        // Prescriptions
+        //print '<fieldset id="fieldsetprescription">';
+        //print '<legend>'.$langs->trans("Prescription").'</legend>'."\n";
+        print '<div class="centpercent" style="margin-top: 5px; margin-bottom: 8px; border-bottom: 1px solid #eee;"></div>';
+
+        print '<div class="fichecenter"><div class="fichehalfleft">';
+        //print '<table class="notopnoleftnoright" width="100%">';
+        //print '<tr><td width="60%" valign="top">';
+
+        print '<table class="notopnoleftnoright" id="addactebox" width="100%">';
+
+        print '<tr><td class="tdtop titlefield">';
+        print $langs->trans("Acte").':';
+        print '</td><td>';
+	//print '<input type="text" size="3" class="flat" name="searchexamenprescrit" value="'.GETPOST("searchexamenprescrit").'" id="searchexamenprescrit">';
+	
+        listacte(1,400,'acte','',4);
+        print ' <input type="button" class="button" id="addacte" name="addacte" value="+">';
+        if ($user->admin) print ' '.info_admin($langs->trans("YouCanChangeValuesForThisListFromDictionarySetup"),1);
+        print '</td></tr>';
+        print '<tr><td class="tdtop">';
+        print '</td><td>';
+        print '<textarea class="flat" name="acte" id="acte" cols="40" rows="'.ROWS_4.'">';
+        print $consult->acte;
         print '</textarea>';
         print '</td>';
         print '</tr>';
@@ -1057,7 +1120,7 @@ else
 		//**************************************************
 	
 
-	print '<table class="notopnoleftnoright" id="addfambox" width="100%">';
+/*	print '<table class="notopnoleftnoright" id="addfambox" width="100%">';
 
         print '<tr><td class="tdtop titlefield">';
         print $langs->trans("Famille des actes").':';
@@ -1072,17 +1135,12 @@ else
         print '<textarea class="flat" name="familleacte" id="familleacte" cols="40" rows="'.ROWS_4.'">';
         print $consult->familleacte;
         print '</textarea>';
-
-	 print '</table>';
-
-
-		
-
+	print '</table>';
 
 	
 	print '</td></tr>';
 
-        print '</table>';
+        print '</table>';*/
 
         print '</div></div></div>';
 
@@ -1300,7 +1358,7 @@ if ($action == '' || $action == 'delete')
     $sql.= " t.diaglessec,";
     $sql.= " t.hdm,";
     $sql.= " t.examenclinique,";
-    $sql.= " t.examenprescrit,";
+    $sql.= " t.acte,";
     $sql.= " t.familleacte,";
     $sql.= " t.traitementprescrit,";
     $sql.= " t.comment,";
