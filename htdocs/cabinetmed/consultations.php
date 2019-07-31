@@ -1067,7 +1067,7 @@ else
         print '</td><td>';
 	//print '<input type="text" size="3" class="flat" name="searchexamenprescrit" value="'.GETPOST("searchexamenprescrit").'" id="searchexamenprescrit">';
 	
-        listacte(1,400,'acte','',4);
+       // listacte(1,400,'acte','',4);
         print ' <input type="button" class="button" id="addacte" name="addacte" value="+">';
         if ($user->admin) print ' '.info_admin($langs->trans("YouCanChangeValuesForThisListFromDictionarySetup"),1);
         print '</td></tr>';
@@ -1105,7 +1105,7 @@ else
         print '<textarea name="infiltration" id="infiltration" class="flat centpercent" rows="'.ROWS_2.'">'.$consult->infiltration.'</textarea><br>';
         //print '<input type="text" class="flat" name="infiltration" id="infiltration" value="'.$consult->infiltration.'" size="50">';
 
-/*        print '<br><b>'.$langs->trans("TypeVisite").'</b>: &nbsp; &nbsp; &nbsp; ';
+        print '<br><b>'.$langs->trans("TypeVisite").'</b>: &nbsp; &nbsp; &nbsp; ';
         print '<input type="radio" class="flat" name="typevisit" value="CS" id="cs"'.($consult->typevisit=='CS'?' checked="checked"':'').'> '.$langs->trans("CS");
         print ' &nbsp; &nbsp; ';
         print '<input type="radio" class="flat" name="typevisit" value="CS2" id="c2"'.($consult->typevisit=='CS2'?' checked="checked"':'').'> '.$langs->trans("CS2");
@@ -1113,14 +1113,14 @@ else
         print '<input type="radio" class="flat" name="typevisit" value="CCAM" id="ccam"'.($consult->typevisit=='CCAM'?' checked="checked"':'').'> '.$langs->trans("CCAM");
         print '<br>';
         print '<br>'.$langs->trans("CodageCCAM").': &nbsp; ';
-        print '<input type="text" class="flat" name="codageccam" id="idcodageccam" value="'.$consult->codageccam.'" size="30">';*/	// name must differ from id
+        print '<input type="text" class="flat" name="codageccam" id="idcodageccam" value="'.$consult->codageccam.'" size="30">';	// name must differ from id
 
 		//**************************************************
 		//******   familles des actes de medecins   ********
 		//**************************************************
 	
 
-/*	print '<table class="notopnoleftnoright" id="addfambox" width="100%">';
+	print '<table class="notopnoleftnoright" id="addfambox" width="100%">';
 
         print '<tr><td class="tdtop titlefield">';
         print $langs->trans("Famille des actes").':';
@@ -1140,10 +1140,12 @@ else
 	
 	print '</td></tr>';
 
-        print '</table>';*/
+        print '</table>';
 
-        print '</div></div></div>';
+	print '</div></div></div>';
 
+	
+	/* ********************************************************************************************** */
         print '</fieldset>'; // End of general information
 
         print '<br>';
